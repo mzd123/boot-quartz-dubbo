@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="gateway-web-app"/>
+
+    <!-- registry address, used for consumer to discover services -->
+
+    <dubbo:registry protocol="zookeeper" address="172.16.220.102:2181"/>
+
+    <dubbo:consumer timeout="600000"/>
+
+    <dubbo:protocol serialization="java"></dubbo:protocol>
+
+    <dubbo:reference interface="com.zongs.user.service.iface.UserService" id="userService"  check="false"/>
+
+    <dubbo:reference id="machineOrderService" interface="com.zongs.trade.service.iface.MachineOrderService" check="false"/>
+
+    <dubbo:reference id="quarterRentBillService" interface="com.zongs.account.service.iface.QuarterRentBillService" check="false"/>
+
+    <dubbo:reference id="itemOrderService" interface="com.zongs.trade.service.iface.ItemOrderService" check="false"/>
+</beans>
